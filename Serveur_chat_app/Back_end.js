@@ -16,6 +16,19 @@ const serveur = http.createServer(function (req, res) {
       if (err) console.log(err);
       res.end(data);
     });
+  } else if (url_parts.pathname.substring(0, 5) == "/poll") {
+    const count = url_parts.pathname.replace(/[^0-9]*/, "");
+    console.log(count);
+    if (messages.length > count) {
+      res.end(
+        JSON.stringify({
+          count: messages.length,
+          append: messages.slice(count).join("\n") + "\n",
+        })
+      );
+    } else {
+      clients.push(res);
+    }
   }
 });
 
