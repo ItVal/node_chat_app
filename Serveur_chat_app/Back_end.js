@@ -11,7 +11,12 @@ const clients = [];
 // Création serveur
 const serveur = http.createServer(function (req, res) {
   const url_parts = url.parse(req.url);
-  
+  if (url_parts.pathname == "/") {
+    fs.readFile("./index.html", function (err, data) {
+      if (err) console.log(err);
+      res.end(data);
+    });
+  }
 });
 
 serveur.listen(9000, "localhost");
