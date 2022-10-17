@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>client</title>
+  </head>
+  <body>
+    <textarea name="" id="client" cols="30" rows="10"></textarea>
+  </body>
+
+  <script>
+    let counter = 9;
+    const poll = function () {
+      fetch("/poll/" + counter)
+        .then((data) => {
+          counter = data.count;
+          console.log(data);
+          return data.json();
+        })
+        .then((datajson) => {
+          const elm = document.getElementById("client");
+          elm.textContent = datajson.append;
+          poll();
+        });
+    };
+    poll();
+  </script>
+</html>
