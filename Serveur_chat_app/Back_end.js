@@ -29,6 +29,7 @@ const serveur = http.createServer(function (req, res) {
     } else {
       clients.push(res);
     }
+
   } else if (url_parts.pathname.substring(0, 5) == "/msg/") {
     let msg = unescape(url_parts.pathname.substring(5));
     messages.push(msg);
